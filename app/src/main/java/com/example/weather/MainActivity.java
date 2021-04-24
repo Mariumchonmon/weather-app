@@ -101,9 +101,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        PageViewAdpter adpter = new PageViewAdpter(getSupportFragmentManager());
-        adpter.addFragment(TodayWeatherFragment.getInstance(), "Today");
-        viewPager.setAdapter(adpter);
+        PageViewAdpter adapter = new PageViewAdpter(getSupportFragmentManager());
+        adapter.addFragment(TodayWeatherFragment.getInstance(), "Today");
+        adapter.addFragment(ForecastFragment.getInstance(),"5 Days");
+        viewPager.setAdapter(adapter);
     }
 
     private void buildLocationRequest() {

@@ -163,7 +163,7 @@
                 <TextView
                     android:layout_marginLeft="8dp"
                     android:layout_column="1"
-                    android:id="@+id/txt_geo_croods"
+                    android:id="@+id/txt_geo_coord"
                     android:text="32.0-81.0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

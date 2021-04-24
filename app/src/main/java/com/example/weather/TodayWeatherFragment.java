@@ -28,6 +28,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 import static com.example.weather.R.id.img_weather;
+import static com.example.weather.R.id.txt_geo_coord;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -38,7 +39,7 @@ public class TodayWeatherFragment extends Fragment {
 
     ImageView img_weather;
     TextView txt_city_name, txt_temperature, txt_description, txt_date_time, txt_wind, txt_pressure, txt_humidity,
-            txt_sunrise, txt_sunset, txt_geo_croods;
+            txt_sunrise, txt_sunset, txt_geo_coord;
     LinearLayout weather_panel;
     ProgressBar loading;
 
@@ -104,7 +105,7 @@ public class TodayWeatherFragment extends Fragment {
         img_weather = (ImageView)itemView.findViewById(R.id.img_weather);
         txt_city_name = (TextView)itemView.findViewById(R.id.txt_city_name);
         txt_description = (TextView)itemView.findViewById(R.id.txt_description);
-        txt_geo_croods = (TextView)itemView.findViewById(R.id.txt_geo_croods);
+        txt_geo_coord = (TextView)itemView.findViewById(R.id.txt_geo_coord);
         txt_humidity = (TextView)itemView.findViewById(R.id.txt_humidity);
         txt_pressure = (TextView)itemView.findViewById(R.id.txt_pressure);
         txt_sunrise = (TextView)itemView.findViewById(R.id.txt_sunrise);
@@ -139,6 +140,8 @@ public class TodayWeatherFragment extends Fragment {
                                   .append(weatherResult.getWeather().get(0).getIcon())
                           .append(".png").toString()).into(img_weather);
 
+                          //Load information
+
                           txt_city_name.setText(weatherResult.getName());
                           txt_description.setText(new StringBuilder("Weather in")
                           .append(weatherResult.getName()).toString());
@@ -148,7 +151,7 @@ public class TodayWeatherFragment extends Fragment {
                           txt_humidity.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getHumidity())).append("%").toString());
                           txt_sunrise.setText(common.convertUnixToHour(weatherResult.getSys().getSunrise()));
                           txt_sunset.setText(common.convertUnixToHour(weatherResult.getSys().getSunset()));
-                          txt_geo_croods.setText(new StringBuilder("[").append(weatherResult.getCoord().toString()).append("]").toString());
+                         txt_geo_coord.setText(new StringBuilder("[").append(weatherResult.getCoord().toString()).append("]").toString());
 
                           //Display panel
                           weather_panel.setVisibility(View.VISIBLE);
@@ -165,5 +168,11 @@ public class TodayWeatherFragment extends Fragment {
 
     })
     );
+    }
+
+    @Override
+    public void onStop() {
+        compositeDisposable.clear();
+        super.onStop();
     }
 }
