@@ -24,11 +24,6 @@ import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ForecastFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ForecastFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -60,15 +55,7 @@ public class ForecastFragment extends Fragment {
         mService = retrofit.create(IOpenWeatherMap.class);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ForecastFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static ForecastFragment newInstance(String param1, String param2) {
         ForecastFragment fragment = new ForecastFragment();
         Bundle args = new Bundle();
@@ -104,6 +91,12 @@ public class ForecastFragment extends Fragment {
 
 
         return itemView;
+    }
+
+    @Override
+    public void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
     }
 
     @Override

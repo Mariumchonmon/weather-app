@@ -51,6 +51,8 @@ dependencies {
     implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
    // picsso
     implementation 'com.squareup.picasso:picasso:2.71828'
-    //design
+    implementation 'com.github.mancj:MaterialSearchBar:0.7.6'
+
+    implementation 'com.label305:asynctask:1.0.0'
     
 }

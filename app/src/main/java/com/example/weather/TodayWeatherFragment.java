@@ -131,7 +131,6 @@ public class TodayWeatherFragment extends Fragment {
                 "metric")
                 .subscribeOn(Schedulers.io())
                  .observeOn(AndroidSchedulers.mainThread())
-                  .observeOn(AndroidSchedulers.mainThread())
                   .subscribe(new Consumer<WeatherResult>() {
                       @Override
                       public void accept(WeatherResult weatherResult) throws Exception {
@@ -151,7 +150,7 @@ public class TodayWeatherFragment extends Fragment {
                           txt_humidity.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getHumidity())).append("%").toString());
                           txt_sunrise.setText(common.convertUnixToHour(weatherResult.getSys().getSunrise()));
                           txt_sunset.setText(common.convertUnixToHour(weatherResult.getSys().getSunset()));
-                         txt_geo_coord.setText(new StringBuilder("[").append(weatherResult.getCoord().toString()).append("]").toString());
+                          txt_geo_coord.setText(new StringBuilder("[").append(weatherResult.getCoord().toString()).append("]").toString());
 
                           //Display panel
                           weather_panel.setVisibility(View.VISIBLE);
@@ -168,6 +167,12 @@ public class TodayWeatherFragment extends Fragment {
 
     })
     );
+    }
+
+    @Override
+    public void onDestroy() {
+        compositeDisposable.clear();
+        super.onDestroy();
     }
 
     @Override
